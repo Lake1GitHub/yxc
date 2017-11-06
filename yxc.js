@@ -61,9 +61,18 @@ var yxc = {
     };
   },
   client: function(ele){
+    ele = ele ||window;
+    if(ele.innerWidth != null) return {width: ele.innerWidth, height: ele.innerHeight};
+    var d = ele.document;
+    if(document.compatMode == "CSS1Compat"){
+      return {
+        width: d.documentElement.clientWidth,
+        height: d.documentElement.clientHeight
+      };
+    }
     return {
-      width: ele.clientWidth,
-      height: ele.clientHeight
+      width: d.body.clientWidth,
+      height: d.body.clientHeight
     };
   },
   scroll: function(ele){
